@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>背單字小幫手</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <h1>背單字小幫手</h1>
+      <div class="tab-buttons">
+        <button id="flashcard-tab" class="active">翻牌學習</button>
+        <button id="manage-tab">單字管理</button>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <section id="flashcard-page" class="page active">
+        <div class="card-area">
+          <div id="vocab-card" class="vocab-card" tabindex="0" role="button" aria-label="點擊翻牌">
+            <div class="card-face card-front" id="card-front">英文單字</div>
+            <div class="card-face card-back" id="card-back">
+              <div><strong>翻譯：</strong><span id="back-translation"></span></div>
+              <div><strong>詞性：</strong><span id="back-pos"></span></div>
+              <div><strong>例句：</strong><span id="back-example"></span></div>
+              <div><strong>字根分析：</strong><span id="back-root"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="controls-row">
+          <button id="prev-word">上一個</button>
+          <button id="random-word">隨機</button>
+          <button id="next-word">下一個</button>
+        </div>
+        <div class="status-line" id="flashcard-status"></div>
+      </section>
+
+      <section id="manage-page" class="page">
+        <div class="manage-grid">
+          <form id="word-form" class="word-form">
+            <h2>新增 / 編輯單字</h2>
+            <label>
+              英文單字
+              <input type="text" id="word-input" placeholder="apple" required />
+            </label>
+            <label>
+              翻譯
+              <input type="text" id="translation-input" placeholder="蘋果" />
+            </label>
+            <label>
+              詞性
+              <input type="text" id="pos-input" placeholder="noun" />
+            </label>
+            <label>
+              例句
+              <textarea id="example-input" rows="3" placeholder="The apple is red."></textarea>
+            </label>
+            <label>
+              字根分析
+              <textarea id="root-input" rows="3" placeholder="apple = 蘋果"></textarea>
+            </label>
+            <div class="form-buttons">
+              <button type="button" id="auto-fill">自動填入</button>
+              <button type="submit" id="save-word">儲存單字</button>
+            </div>
+            <div class="status-line" id="manage-status"></div>
+          </form>
+
+          <div class="word-list-panel">
+            <h2>單字列表</h2>
+            <div class="search-toolbar">
+              <label class="search-box">
+                <span>搜尋</span>
+                <input type="search" id="search-input" placeholder="輸入英文或中文關鍵字..." />
+              </label>
+              <div class="search-summary" id="search-summary">顯示全部單字</div>
+            </div>
+            <div id="word-list" class="word-list"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

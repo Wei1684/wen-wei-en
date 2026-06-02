@@ -1,0 +1,306 @@
+:root {
+  --bg: #f4f7fb;
+  --card: #ffffff;
+  --card-back: #f7f3ff;
+  --text: #1f2937;
+  --accent: #4f46e5;
+  --accent-soft: #eef2ff;
+  --border: #d1d5db;
+  --shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(circle at top, #eef4ff 0%, var(--bg) 45%);
+  color: var(--text);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.app-shell {
+  width: min(1120px, 100%);
+  background: rgba(255,255,255,0.97);
+  border: 1px solid rgba(148,163,184,0.18);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  border-bottom: 1px solid rgba(148,163,184,0.18);
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2vw, 2rem);
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.tab-buttons button {
+  border: 1px solid transparent;
+  background: #fff;
+  color: var(--text);
+  padding: 10px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-buttons button.active,
+.tab-buttons button:hover {
+  background: var(--accent);
+  color: white;
+  border-color: rgba(79,70,229,0.9);
+}
+
+.app-main {
+  padding: 32px;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+.card-area {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+
+.vocab-card {
+  width: min(500px, 90vw);
+  height: 320px;
+  position: relative;
+  perspective: 1200px;
+  cursor: pointer;
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 28px;
+  backface-visibility: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.7s ease;
+  padding: 24px;
+  text-align: center;
+}
+
+.card-front {
+  background: linear-gradient(135deg, #ffffff 0%, #eef2ff 100%);
+  transform: rotateY(0deg);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+}
+
+.card-back {
+  background: var(--card-back);
+  transform: rotateY(180deg);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  justify-items: start;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.vocab-card.flipped .card-front {
+  transform: rotateY(-180deg);
+}
+
+.vocab-card.flipped .card-back {
+  transform: rotateY(0deg);
+}
+
+.controls-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.controls-row button,
+.form-buttons button {
+  border: none;
+  border-radius: 999px;
+  padding: 12px 18px;
+  cursor: pointer;
+  background: var(--accent);
+  color: white;
+  font-weight: 600;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.controls-row button:hover,
+.form-buttons button:hover {
+  transform: translateY(-1px);
+  background: #4338ca;
+}
+
+.manage-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+}
+
+.word-form,
+.word-list-panel {
+  background: white;
+  border: 1px solid rgba(148,163,184,0.18);
+  border-radius: 24px;
+  padding: 24px;
+}
+
+.word-form h2,
+.word-list-panel h2 {
+  margin-top: 0;
+}
+
+.word-form label {
+  display: block;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.word-form input,
+.word-form textarea {
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #f8fafc;
+  font-size: 1rem;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.status-line {
+  margin-top: 16px;
+  min-height: 24px;
+  color: #374151;
+}
+
+.word-list {
+  display: grid;
+  gap: 12px;
+  max-height: 620px;
+  overflow-y: auto;
+}
+
+.search-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.search-box {
+  display: grid;
+  gap: 8px;
+  flex: 1;
+  min-width: 220px;
+}
+
+.search-box span {
+  font-weight: 600;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #f8fafc;
+  font-size: 1rem;
+}
+
+.search-summary {
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
+.word-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 18px;
+  background: #f8fafc;
+  border: 1px solid rgba(148,163,184,0.16);
+}
+
+.word-item strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 1.05rem;
+}
+
+.word-item .word-meta {
+  color: #4b5563;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.word-item .item-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.word-item .item-actions button {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.word-item .item-actions button:hover {
+  background: #d1d5db;
+}
+
+@media (max-width: 900px) {
+  .manage-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    border-radius: 18px;
+  }
+
+  .vocab-card {
+    height: 260px;
+  }
+}
