@@ -1,4 +1,5 @@
 const STORAGE_KEY = 'flashcard-vocab-cards';
+const BACKEND_ENDPOINT = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
 
 const defaultCards = [
   {
@@ -253,7 +254,28 @@ async function fetchDictionary(word) {
   return { pos, example };
 }
 
-function addOrUpdateCard(event) {
+async function postWordToBackend(card) {
+  if (!BACKEND_ENDPOINT || BACKEND_ENDPOINT.includes('YOUR_SCRIPT_ID')) {
+    throw new Error('請先將 BACKEND_ENDPOINT 更新為已部署的 Google Apps Script 網址。');
+  }
+
+  const response = await fetch(BACKEND_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(card)
+  });
+
+  if (!response.ok) {
+    const message = await response.text();
+    throw new Error(`後端回應錯誤：${response.status} ${message}`);
+  }
+
+  return response.json().catch(() => null);
+}
+
+async function addOrUpdateCard(event) {
   event.preventDefault();
 
   const word = normalizeWord(wordInput.value);
@@ -281,6 +303,15 @@ function addOrUpdateCard(event) {
   saveCards();
   renderWordList();
   renderFlashcard();
+
+  try {
+    showManageStatus('儲存中，正在送出後端...');
+    await postWordToBackend(newCard);
+    showManageStatus(`已儲存並同步：${word}`);
+  } catch (error) {
+    showManageStatus(`已儲存本機，但後端同步失敗：${error.message}`, true);
+  }
+
   clearForm();
 }
 
