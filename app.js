@@ -1,5 +1,5 @@
 const STORAGE_KEY = 'flashcard-vocab-cards';
-const BACKEND_ENDPOINT = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+const BACKEND_ENDPOINT = 'https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbw3dFLqUBNU0GAymUot3huzszC1r4nlyZi-ebBGVW0rFCqQSoi_2uYx28n1g0lgsCtb/exec/exec';
 
 const defaultCards = [
   {
